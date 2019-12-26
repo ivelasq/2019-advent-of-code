@@ -34,38 +34,6 @@ ReadEntireFile(const char *FileName)
 }
 
 static bool
-IsEOF(stream *Stream)
-{
-    bool Result = (Stream->At == '\0');
-
-    return(Result);
-}
-
-static bool
-IsEOL(char Char)
-{
-    bool Result = ((Char == '\n') ||
-                   (Char == '\r'));
-    return(Result);
-}
-
-static void
-EatEOL(stream *Stream)
-{
-    while(Stream->At[0])
-    {
-        if(IsEOL(Stream->At[0]))
-        {
-            Stream->At++;
-        }
-        else
-        {
-            break;
-        }
-    }
-}
-
-static bool
 IsNumeric(char Char)
 {
     bool Result = (('0' <= Char) && (Char <= '9'));
@@ -109,7 +77,6 @@ main(int ArgCount, char **Args)
                 int Opcode = ParseInt(Stream);
                 Assert(OpcodeCursor < OpcodeCount);
                 Opcodes[OpcodeCursor++] = Opcode;
-                printf("Opcode: %d\n", Opcode);
                 if(Stream->At[0] == ',')
                 {
                     Stream->At++;
@@ -178,13 +145,7 @@ main(int ArgCount, char **Args)
             }
         }
 
-        printf("Final state:\n");
-        for(int OpcodeIndex = 0;
-            OpcodeIndex < OpcodeCursor;
-            OpcodeIndex++)
-        {
-            printf("%d\n", Opcodes[OpcodeIndex]);
-        }
+        printf("Position 0 value: %d\n", Opcodes[0]);
     }
 
     return(0);
