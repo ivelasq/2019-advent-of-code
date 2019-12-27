@@ -39,6 +39,14 @@ V2(int X, int Y)
 }
 
 inline bool
+operator==(v2 A, v2 B)
+{
+    bool Result = ((A.x == B.x) &&
+                   (A.y == B.y));
+    return(Result);
+}
+
+inline bool
 operator!=(v2 A, v2 B)
 {
     bool Result = ((A.x != B.x) ||
